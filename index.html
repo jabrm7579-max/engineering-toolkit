@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Toolkit</title>
+<meta name="description" content="Unit converter, Ohm's law solver, shape calculator and resistor color code decoder.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 2v28M2 16h28" stroke="currentColor" stroke-width="1" opacity=".5"/><circle cx="16" cy="16" r="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/></svg>
+      <span>Engineering<br>Toolkit</span>
+    </div>
+    <nav role="tablist" aria-label="Tools">
+      <button role="tab" data-tab="conv">Converter</button>
+      <button role="tab" data-tab="ohm">Ohm's law</button>
+      <button role="tab" data-tab="shape">Shapes</button>
+      <button role="tab" data-tab="res">Resistor</button>
+    </nav>
+    <button id="theme" class="ghost" type="button">Light mode</button>
+  </aside>
+
+  <main>
+    <section class="panel" id="conv" role="tabpanel" hidden>
+      <h2>Unit converter</h2>
+      <p class="lead">Type a value. Every unit in the category updates instantly.</p>
+      <div class="chips" id="cCats"></div>
+      <div class="conv-row">
+        <label>Value<input id="cVal" type="number" step="any" value="1" inputmode="decimal"></label>
+        <label>From<select id="cFrom"></select></label>
+        <button id="cSwap" class="ghost" type="button" aria-label="Swap units">⇄</button>
+        <label>To<select id="cTo"></select></label>
+      </div>
+      <div class="readout"><small id="cExpr"></small><output id="cOut">—</output></div>
+      <p class="msg" id="cMsg" role="alert"></p>
+      <h3>All units <span class="sub">(tap one to set it as the target)</span></h3>
+      <div class="tiles" id="cAll"></div>
+    </section>
+
+    <section class="panel" id="ohm" role="tabpanel" hidden>
+      <h2>Ohm's law and power</h2>
+      <p class="lead">Fill in any two of the four values. The other two are calculated.</p>
+      <div class="split">
+        <div>
+          <div class="fields" id="oFields"></div>
+          <p class="msg" id="oMsg" role="alert"></p>
+          <button id="oClear" class="ghost" type="button">Clear all</button>
+        </div>
+        <figure class="fig">
+          <svg id="oTri" viewBox="0 0 200 180" role="img" aria-label="Ohm's law triangle">
+            <polygon points="100,10 190,165 10,165" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="45" y1="100" x2="155" y2="100" stroke="currentColor" stroke-width="2"/>
+            <line x1="100" y1="100" x2="100" y2="165" stroke="currentColor" stroke-width="2"/>
+            <text id="tV" x="100" y="78" text-anchor="middle">V</text>
+            <text id="tI" x="65" y="148" text-anchor="middle">I</text>
+            <text id="tR" x="135" y="148" text-anchor="middle">R</text>
+          </svg>
+          <figcaption>V = I × R &nbsp; P = V × I</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="panel" id="shape" role="tabpanel" hidden>
+      <h2>Area and volume</h2>
+      <p class="lead">Pick a shape and enter its dimensions. Use one unit for everything.</p>
+      <div class="chips" id="gShapes"></div>
+      <div class="split">
+        <div>
+          <div class="fields" id="gFields"></div>
+          <p class="msg" id="gMsg" role="alert"></p>
+          <div class="results" id="gRes"></div>
+        </div>
+        <figure class="fig"><svg id="gSvg" viewBox="0 0 200 140" role="img" aria-label="Shape drawing"></svg>
+          <figcaption id="gCap"></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="panel" id="res" role="tabpanel" hidden>
+      <h2>Resistor color code</h2>
+      <p class="lead">Choose the four bands. The value is decoded for you.</p>
+      <div class="split">
+        <div class="fields stack">
+          <label>Band 1 (first digit)<select id="rb1"></select></label>
+          <label>Band 2 (second digit)<select id="rb2"></select></label>
+          <label>Band 3 (multiplier)<select id="rm"></select></label>
+          <label>Band 4 (tolerance)<select id="rt"></select></label>
+        </div>
+        <div>
+          <svg id="rSvg" viewBox="0 0 320 110" role="img" aria-label="Resistor drawing">
+            <line x1="5" y1="55" x2="315" y2="55" stroke="currentColor" stroke-width="4" opacity=".6"/>
+            <rect x="55" y="22" width="210" height="66" rx="30" class="rbody"/>
+            <rect id="k1" x="95" y="22" width="16" height="66"/>
+            <rect id="k2" x="127" y="22" width="16" height="66"/>
+            <rect id="k3" x="159" y="22" width="16" height="66"/>
+            <rect id="k4" x="215" y="22" width="16" height="66"/>
+          </svg>
+          <div class="readout"><small id="rRange"></small><output id="rOut">—</output></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
